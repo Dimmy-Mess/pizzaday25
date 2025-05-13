@@ -1,0 +1,148 @@
+/* Reset básico e configuração global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100vh; /* Ocupa 100% da altura da viewport */
+    width: 100vw;  /* Ocupa 100% da largura da viewport */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte moderna e limpa */
+    background-color: #121212; /* Preto suave como base */
+    color: #ffffff; /* Texto branco */
+    overflow: hidden; /* Impede qualquer scroll */
+    display: flex; /* Para centralizar o container, se necessário */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Variáveis de cor */
+:root {
+    --bitcoin-orange: #f7931a;
+    --texto-principal: #ffffff;
+    --texto-secundario: #b0b0b0;
+    --fundo-coluna-esquerda: #1c1c1c; /* Cinza um pouco mais claro para a coluna da esquerda */
+    --fundo-coluna-direita: #121212; /* Preto suave */
+}
+
+.container {
+    display: flex; /* Ativa o Flexbox para o layout em colunas */
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Sombra sutil para profundidade no telão */
+}
+
+/* Coluna da Esquerda: Logo, Título, Mensagens */
+.coluna-esquerda {
+    width: 40%; /* Proporção da coluna esquerda */
+    height: 100%;
+    background-color: var(--fundo-coluna-esquerda);
+    padding: 4vh 3vw; /* Espaçamento interno responsivo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Distribui o espaço verticalmente */
+    align-items: center;
+    text-align: center;
+    border-right: 2px solid var(--bitcoin-orange); /* Linha divisória laranja */
+}
+
+.logo-header #logo {
+    max-width: 70%; /* Ajuste o tamanho do logo conforme necessário */
+    max-height: 25vh; /* Limita a altura do logo */
+    object-fit: contain; /* Garante que o logo não seja cortado */
+    margin-bottom: 3vh;
+}
+
+.logo-header h1 {
+    font-size: clamp(2em, 4vw, 3.5em); /* Tamanho de fonte responsivo */
+    color: var(--bitcoin-orange);
+    margin-bottom: 3vh;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+.mensagens {
+    padding: 2vh 1vw;
+}
+
+.mensagens h2 {
+    font-size: clamp(1.5em, 2.5vw, 2.2em);
+    color: var(--bitcoin-orange);
+    margin-bottom: 2vh;
+}
+
+.mensagens p {
+    font-size: clamp(0.9em, 1.5vw, 1.3em);
+    color: var(--texto-secundario);
+    line-height: 1.6;
+    margin-bottom: 1.5vh;
+}
+
+/* Coluna da Direita: Pizza e Preço */
+.coluna-direita {
+    width: 60%; /* Proporção da coluna direita */
+    height: 100%;
+    background-color: var(--fundo-coluna-direita);
+    padding: 5vh 4vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center;
+    text-align: center;
+}
+
+.imagem-pizza-container {
+    width: 100%;
+    max-height: 55vh; /* Altura máxima para a imagem da pizza */
+    margin-bottom: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imagem-pizza {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Garante que a pizza inteira apareça */
+    border-radius: 50%; /* Pizza redonda! */
+    border: 5px solid var(--bitcoin-orange);
+    box-shadow: 0 0 25px var(--bitcoin-orange); /* Brilho laranja ao redor da pizza */
+}
+
+.info-preco {
+    width: 100%;
+}
+
+.info-preco p {
+    font-size: clamp(1em, 1.8vw, 1.5em);
+    color: var(--texto-secundario);
+    margin-bottom: 1vh;
+}
+
+.btc-price {
+    font-size: clamp(2.5em, 6vw, 5em); /* Tamanho bem grande para o preço */
+    font-weight: bold;
+    color: var(--bitcoin-orange);
+    margin: 1vh 0;
+    padding: 1vh 2vw;
+    background-color: rgba(0,0,0,0.3); /* Fundo sutil para o preço */
+    border-radius: 10px;
+    display: inline-block; /* Para o background não ocupar a largura toda */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.atualizacao-info {
+    font-size: clamp(0.8em, 1.2vw, 1em) !important; /* Sobrescreve o p geral se necessário */
+    color: #888; /* Mais sutil */
+}
+
+/* Opcional: Efeito sutil de entrada para dar um toque especial */
+body {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

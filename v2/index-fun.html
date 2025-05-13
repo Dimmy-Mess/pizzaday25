@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Pizza Day - A Descoberta!</title>
+    <link rel="stylesheet" href="style-fun.css">
+</head>
+<body>
+    <div class="overlay-inicial" id="overlayInicial">
+        <img src="logo.png" alt="Logo Evento" class="logo-overlay">
+        <h1>Bitcoin Pizza Day</h1>
+        <p class="frase-curiosa">Quantos satoshis vale uma fatia da história?</p>
+        <div class="loader-pizza">
+            <div class="fatia fatia-1"></div>
+            <div class="fatia fatia-2"></div>
+            <div class="fatia fatia-3"></div>
+            <div class="fatia fatia-4"></div>
+            <div class="fatia fatia-5"></div>
+            <div class="fatia fatia-6"></div>
+            <div class="fatia fatia-7"></div>
+            <div class="fatia fatia-8"></div>
+        </div>
+        <p class="aguarde-msg">Decifrando o sabor digital...</p>
+    </div>
+
+    <main class="conteudo-principal" id="conteudoPrincipal" style="display: none;">
+        <div class="pizza-container">
+            <img src="pizza.jpg" alt="Pizza Deliciosa" id="imagem-pizza-principal">
+            <div class="preco-container" id="precoPizzaContainer">
+                <span class="simbolo-btc">₿</span>
+                <div id="preco-pizza-btc" class="btc-valor">
+                    Carregando...
+                </div>
+            </div>
+        </div>
+
+        <div class="info-evento-lateral">
+            <img src="logo.png" alt="Logo Evento" class="logo-lateral">
+            <h2>Bitcoin Pizza Day</h2>
+            <p class="mensagem-historia">Lembrando os 10.000 BTC pagos por duas pizzas em 2010!</p>
+            <p class="atualizacao-info"><em>Valor atualizado a cada 30 segundos.</em></p>
+        </div>
+
+        <div class="pixel p1"></div>
+        <div class="pixel p2"></div>
+        <div class="pixel p3"></div>
+        <div class="pixel p4"></div>
+        <div class="pixel p5"></div>
+        <div class="pixel p6"></div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Pequeno script para a transição do overlay
+        // e para garantir que o preço seja visível
+        const overlay = document.getElementById('overlayInicial');
+        const conteudoPrincipal = document.getElementById('conteudoPrincipal');
+        const precoPizzaElementoFun = document.getElementById('preco-pizza-btc');
+        const precoPizzaContainer = document.getElementById('precoPizzaContainer');
+
+        // Adiciona um ouvinte para quando a animação do loader terminar (aproximadamente)
+        // ou simplesmente após um tempo fixo
+        setTimeout(() => {
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none'; // Impede interação após sumir
+            conteudoPrincipal.style.display = 'flex'; // Ou o display que o CSS definir
+            setTimeout(() => {
+                conteudoPrincipal.style.opacity = '1';
+                // Força o elemento do preço a ser visível e com conteúdo
+                // Isso ajuda a evitar problemas da animação anterior
+                if(precoPizzaElementoFun.textContent === 'Carregando...') {
+                    // Se o script.js ainda não atualizou, podemos manter ou mudar
+                }
+                precoPizzaContainer.style.opacity = '1'; // Garante que o container do preço apareça
+                precoPizzaElementoFun.style.opacity = '1';
+
+            }, 50); // Pequeno delay para o display:flex fazer efeito antes do fade-in
+        }, 5500); // Tempo para a animação do overlay (ex: 5.5 segundos)
+
+        // Modificação para garantir que o "Carregando..." não fique preso em opacity 0
+        // Esta é uma salvaguarda. O ideal é que o script.js principal funcione como esperado.
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                    if (precoPizzaElementoFun.textContent !== '' && precoPizzaElementoFun.textContent !== 'Carregando...') {
+                        precoPizzaElementoFun.classList.add('loaded');
+                        precoPizzaContainer.classList.add('price-active');
+                    } else {
+                        precoPizzaElementoFun.classList.remove('loaded');
+                    }
+                }
+            });
+        });
+        observer.observe(precoPizzaElementoFun, { childList: true, characterData: true, subtree: true });
+
+    </script>
+</body>
+</html>

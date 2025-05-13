@@ -1,0 +1,329 @@
+/* style-fun.css - Versão Completa com NOVO Loader "Órbita do Sabor Bitcoin" */
+
+/* Importação da fonte pixelada (opcional, requer conexão com a internet ou fonte instalada) */
+/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Descomente a linha abaixo e comente a próxima se quiser usar a Press Start 2P */
+    /* font-family: 'Press Start 2P', cursive; */
+    font-family: 'Courier New', Courier, monospace; /* Fonte alternativa se Press Start 2P não estiver disponível */
+    height: 100vh;
+    width: 100vw;
+    background-color: #0a0a0a; /* Quase preto */
+    color: #ffffff;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+:root {
+    --bitcoin-orange: #f7931a;
+    --pure-white: #ffffff;
+    --light-grey: #cccccc;
+    --dark-grey: #333333;
+}
+
+/* Overlay Inicial */
+.overlay-inicial {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 0.8s ease-out 5s; /* Desaparece após 5s + 0.8s de transição */
+}
+
+.logo-overlay {
+    max-width: 150px;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.overlay-inicial h1 {
+    font-size: clamp(2.5em, 6vw, 4em);
+    color: var(--bitcoin-orange);
+    text-shadow: 0 0 10px var(--bitcoin-orange);
+    margin-bottom: 15px;
+    animation: textGlitch 4s infinite alternate;
+}
+
+.frase-curiosa {
+    font-size: clamp(1em, 2.5vw, 1.5em);
+    color: var(--light-grey);
+    margin-bottom: 40px;
+    animation: fadeInPulsate 2s ease-in-out forwards, textShine 3s infinite alternate 2s;
+    opacity: 0;
+}
+
+.aguarde-msg {
+    margin-top: 30px; /* Ajustado para dar espaço ao novo loader */
+    font-size: clamp(0.8em, 2vw, 1.2em);
+    color: var(--bitcoin-orange);
+    opacity: 0;
+    animation: fadeInPulsate 1s ease-in-out forwards 4s; /* Aparece aos 4s */
+}
+
+/* --- NOVO LOADER: A Órbita do Sabor Bitcoin --- */
+.novo-loader-orbita {
+    position: relative;
+    width: 150px; /* Tamanho do container do loader */
+    height: 150px;
+    margin-bottom: 25px; /* Espaço antes da mensagem "Aguarde..." */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pizza-loader-img {
+    width: 100px; /* Tamanho da imagem da pizza no loader */
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--bitcoin-orange);
+    box-shadow: 0 0 15px var(--bitcoin-orange);
+    animation: pulsePizzaImg 2.5s infinite ease-in-out;
+}
+
+.bitcoin-orbita {
+    position: absolute;
+    font-size: 30px; /* Tamanho do símbolo Bitcoin */
+    color: var(--bitcoin-orange);
+    text-shadow: 0 0 8px var(--bitcoin-orange);
+    width: 40px; /* Para ajudar no posicionamento da órbita */
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Animação de órbita */
+    animation: orbitBitcoin 4s linear infinite;
+}
+
+
+/* Conteúdo Principal (Aparece após o Overlay) */
+.conteudo-principal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 2vw;
+    opacity: 0; /* Começa invisível, controlado pelo JS ou pela transição do overlay */
+    transition: opacity 0.8s ease-in;
+    position: relative; /* Para os pixels flutuantes */
+}
+
+.pizza-container {
+    flex: 2; /* Ocupa mais espaço */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: popInPizza 1s ease-out 0.5s forwards; /* Animação de entrada da pizza */
+    opacity: 0; /* Inicia oculto para animação, o 'forwards' mantém opacity: 1 */
+}
+
+#imagem-pizza-principal {
+    max-width: 80vmin; /* Responsivo ao menor lado da viewport */
+    max-height: 80vmin;
+    border-radius: 50%;
+    border: 6px solid var(--dark-grey);
+    box-shadow: 0 0 35px rgba(0,0,0,0.7), 0 0 15px var(--bitcoin-orange) inset;
+    transition: transform 0.3s ease-out;
+}
+
+#imagem-pizza-principal:hover {
+    transform: scale(1.03);
+}
+
+.preco-container {
+    position: absolute;
+    bottom: 10%; /* Posição sobre a pizza */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 15px 30px;
+    border-radius: 50px; /* Formato de pílula */
+    border: 3px solid var(--bitcoin-orange);
+    box-shadow: 0 0 20px var(--bitcoin-orange);
+    display: flex;
+    align-items: center;
+    opacity: 0; /* Inicia oculto, controlado pelo JS/animação */
+    animation: slideUpPrice 0.8s ease-out 1.5s forwards; /* Animação de entrada do preço */
+    transition: opacity 0.5s; /* Para o JS controlar */
+}
+
+.preco-container.price-active { /* Adicionada pelo JS quando o preço carrega */
+    opacity: 1;
+}
+
+.simbolo-btc {
+    font-size: clamp(2em, 5vw, 3.5em);
+    color: var(--bitcoin-orange);
+    margin-right: 15px;
+    animation: pulseBTCLogo 2s infinite ease-in-out;
+}
+
+.btc-valor {
+    font-family: 'Courier New', Courier, monospace; /* Fonte mais "digital" para o preço */
+    font-size: clamp(2em, 5vw, 3.5em);
+    color: var(--pure-white);
+    font-weight: bold;
+    letter-spacing: 1px;
+    min-width: 200px; /* Para evitar que "Carregando..." quebre o layout */
+    opacity: 1; /* Garantir que o texto dentro seja visível */
+    transition: opacity 0.3s;
+}
+.btc-valor.loaded { /* Adicionada pelo JS quando o preço real é carregado */
+    animation: priceFinalReveal 0.5s ease-out;
+}
+
+
+.info-evento-lateral {
+    flex: 1; /* Ocupa menos espaço */
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInRightInfo 1s ease-out 0.8s forwards; /* Animação de entrada da info */
+    opacity: 0; /* Inicia oculto para animação */
+}
+
+.logo-lateral {
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+.info-evento-lateral h2 {
+    color: var(--bitcoin-orange);
+    font-size: clamp(1.8em, 3.5vw, 2.8em);
+    margin-bottom: 15px;
+}
+
+.mensagem-historia {
+    font-size: clamp(0.9em, 1.8vw, 1.3em);
+    color: var(--light-grey);
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.atualizacao-info {
+    font-size: clamp(0.7em, 1.5vw, 1em);
+    color: #888;
+}
+
+
+/* Pixels Flutuantes Decorativos */
+.pixel {
+    position: absolute;
+    background-color: var(--bitcoin-orange);
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    opacity: 0;
+    animation: floatPixel 10s infinite ease-in-out, fadeInPixel 1s forwards;
+    box-shadow: 0 0 5px var(--bitcoin-orange);
+}
+
+.p1 { top: 15%; left: 10%; animation-delay: 1s, 6s; } /* delay para floatPixel, delay para fadeInPixel */
+.p2 { top: 70%; left: 20%; animation-delay: 3s, 6.5s; }
+.p3 { top: 30%; left: 85%; animation-delay: 5s, 7s; }
+.p4 { top: 80%; left: 70%; animation-delay: 2s, 6.2s; }
+.p5 { top: 50%; left: 50%; animation-delay: 4s, 7.5s; }
+.p6 { top: 5%; left: 40%; animation-delay: 0s, 6.8s; }
+
+
+/* Keyframes para Animações */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes textGlitch {
+    0%, 100% { text-shadow: 0 0 10px var(--bitcoin-orange), 2px 2px 0 #007bff, -2px -2px 0 #ff007b; } /* Cores de glitch alteradas */
+    25% { text-shadow: 0 0 12px var(--bitcoin-orange), -2px 0 0 #007bff, 2px 0 0 #ff007b; }
+    50% { text-shadow: 0 0 10px var(--bitcoin-orange), 0 -2px 0 #007bff, 0 2px 0 #ff007b; }
+    75% { text-shadow: 0 0 15px var(--bitcoin-orange), 2px -2px 0 #007bff, -2px 2px 0 #ff007b; }
+}
+
+@keyframes fadeInPulsate {
+    0% { opacity: 0; transform: scale(0.95); }
+    50% { opacity: 0.7; transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes textShine{
+  0%{ text-shadow:0 0 5px var(--bitcoin-orange), 0 0 10px var(--pure-white); }
+  50%{ text-shadow:0 0 10px var(--bitcoin-orange), 0 0 20px var(--bitcoin-orange); }
+  100%{ text-shadow:0 0 5px var(--bitcoin-orange), 0 0 10px var(--pure-white); }
+}
+
+/* Keyframes para o NOVO loader de órbita */
+@keyframes pulsePizzaImg {
+    0%, 100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 10px var(--bitcoin-orange);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px var(--bitcoin-orange);
+    }
+}
+
+@keyframes orbitBitcoin {
+    0% {
+        transform: translate(0px, 0px) rotate(0deg) translateX(70px) rotate(0deg);
+    }
+    100% {
+        transform: translate(0px, 0px) rotate(360deg) translateX(70px) rotate(-360deg);
+    }
+}
+
+/* Keyframes para conteúdo principal */
+@keyframes popInPizza {
+    from { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes slideUpPrice {
+    from { opacity: 0; transform: translate(-50%, 50px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+@keyframes pulseBTCLogo {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 3px var(--bitcoin-orange)); }
+    50% { transform: scale(1.15); filter: drop-shadow(0 0 10px var(--bitcoin-orange)); }
+}
+@keyframes priceFinalReveal {
+    from { opacity: 0.5; letter-spacing: 5px; } /* Efeito de "revelação" */
+    to { opacity: 1; letter-spacing: 1px; }
+}
+
+@keyframes fadeInRightInfo {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Keyframes para pixels flutuantes */
+@keyframes floatPixel {
+    0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+    25% { transform: translateY(-20px) translateX(15px) rotate(90deg); }
+    50% { transform: translateY(10px) translateX(-15px) rotate(180deg); }
+    75% { transform: translateY(-15px) translateX(10px) rotate(270deg); }
+}
+@keyframes fadeInPixel {
+    to { opacity: 0.6; }
+}
