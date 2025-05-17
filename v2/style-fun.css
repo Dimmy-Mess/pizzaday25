@@ -1,7 +1,7 @@
 /* style-fun.css - Versão Completa com NOVO Loader "Órbita do Sabor Bitcoin" */
 
 /* Importação da fonte pixelada (opcional, requer conexão com a internet ou fonte instalada) */
-/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
     margin: 0;

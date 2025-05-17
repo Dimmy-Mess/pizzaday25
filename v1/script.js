@@ -1,7 +1,7 @@
 // script.js
 
 // Constantes e Variáveis Globais
-const PRECO_PIZZA_BRL = 70.00; // Preço da pizza em Reais
+const PRECO_PIZZA_BTC = 10000.00; // Preço da pizza em Reais
 const API_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl';
 const precoPizzaElemento = document.getElementById('preco-pizza-btc'); // Elemento HTML onde o preço será exibido
 
@@ -39,11 +39,17 @@ async function atualizarPrecoPizza() {
         }
 
         // 5. Calcular o preço da pizza em Bitcoin
-        const precoPizzaEmBtc = PRECO_PIZZA_BRL / precoBtcEmBrl;
+        const precoPizzaEmBtc = PRECO_PIZZA_BTC * precoBtcEmBrl;
+
+        const precoBRFormatado = new Intl.NumberFormat('pt-BR', {
+                                                    style: 'currency',
+                                                    currency: 'BRL',
+                                                    maximumFractionDigits: 2
+                                                }).format(precoPizzaEmBtc);
 
         // 6. Formatar e exibir o preço
         // Exibe com 8 casas decimais, típico para Bitcoin
-        precoPizzaElemento.textContent = `BTC ${precoPizzaEmBtc.toFixed(8)}`;
+        precoPizzaElemento.textContent = `${precoBRFormatado}`;
 
     } catch (erro) {
         // 7. Lidar com erros (problemas de rede, erros da API, etc.)
